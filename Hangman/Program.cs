@@ -112,7 +112,7 @@ namespace Hangman
                 Console.WriteLine("You have won the game!");
                 //todo change word if game won then change the word and display message
                 //todo reset all variables
-                hasLost = true; //todo change thisx
+                hasLost = true; //todo change this
             }
             
         }
