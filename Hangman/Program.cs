@@ -4,7 +4,7 @@ namespace Hangman
 {
     class Program
     {
-        private static int lives = 3;
+        private static int lives = 8;
         private static String word = "";
         private static int gamesWon = 0;
         private static Boolean hasLost = false;
@@ -13,6 +13,7 @@ namespace Hangman
         {
             PrintIntroduction();
             GenerateWord();
+            //todo setup 2d array for string
             
             while (!hasLost)
             {
@@ -33,18 +34,8 @@ namespace Hangman
             return "hello"; //todo read from data
         }
         
-        /* Example:
-        .............______
-        .............|....|
-        .............O....|
-        ............/|\...|
-        ............/.\...|
-        ................./|
-        ..........=========
-         */
         private static void DrawHangman()
         {
-            
             //todo console log a string of the hangman guy
         }
 
