@@ -4,30 +4,59 @@ namespace Hangman
 {
     class Program
     {
-        private int lives = 3;
-        private String word = "";
-        private int gamesWon = 0;
-        private Boolean hasLost = false;
+        private static int lives = 3;
+        private static String word = "";
+        private static int gamesWon = 0;
+        private static Boolean hasLost = false;
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            //Console.ReadLine("Please Enter a character");
+            PrintIntroduction();
+            GenerateWord();
+            
+            while (!hasLost)
+            {
+                DrawHangman();
+                TakeTurn();
+                CheckGameWin();
+            }
         }
 
-        public String GenerateWord()
+        private static void PrintIntroduction()
+        {
+            Console.WriteLine("Hello! Welcome to le hangman game.");
+            Console.WriteLine("Insert Instructions here.");
+        }
+
+        private static String GenerateWord()
         {
             return "hello"; //todo read from data
         }
-
-        public void TakeTurn()
+        
+        /* Example:
+        .............______
+        .............|....|
+        .............O....|
+        ............/|\...|
+        ............/.\...|
+        ................./|
+        ..........=========
+         */
+        private static void DrawHangman()
         {
-            //todo a turn for each guess
+            
+            //todo console log a string of the hangman guy
         }
 
-        public void DrawHangman()
+        private static void TakeTurn()
         {
-            //todo console log a string of the hangman guy
+            //todo a turn for each guess
+            //Console.ReadLine("Please Enter a character");
+        }
+
+        private static void CheckGameWin()
+        {
+            //todo change word if game won then change the word and display message
         }
     }
 }
