@@ -13,6 +13,11 @@ namespace Hangman
         private ArrayList guesses = new ArrayList();
         private int turn = 0;
 
+        public HangmanGamemode(string s)
+        {
+            Console.WriteLine($"Test {s}");
+        }
+
         public HangmanGamemode()
         {
             GenerateWord();
@@ -44,7 +49,7 @@ namespace Hangman
             
             GenerateWord();
         }
-        private void GenerateWord()
+        public void GenerateWord()
         {
             string[] lines = System.IO.File.ReadAllLines("../../.././data/words.txt");
             word = lines[new Random().Next(lines.Length)];
