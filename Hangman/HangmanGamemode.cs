@@ -6,10 +6,10 @@ namespace Hangman
 {
     public class HangmanGamemode
     {
-        private string word;
-        private StringBuilder guessedWord = new StringBuilder("");
-        private int lives = 8;
-        private Boolean hasLost = false;
+        public string Word { get; set; }
+        public StringBuilder guessedWord = new StringBuilder("");
+        public int lives { get; set; } = 8;
+        public Boolean gameEnded { get; set; }
         private ArrayList guesses = new ArrayList();
         private int turn = 0;
 
@@ -22,9 +22,9 @@ namespace Hangman
         {
             GenerateWord();
             
-            while (!hasLost)
+            while (!gameEnded)
             {
-                if(guessedWord.Equals(word))
+                if(guessedWord.Equals(Word))
                     EndGame();
                 
                 DrawHangman();
@@ -43,7 +43,7 @@ namespace Hangman
 
             if (playAgain == null || playAgain.ToLower().Equals("y"))
             {
-                hasLost = true;
+                gameEnded = true;
                 return;
             }
             
@@ -52,10 +52,10 @@ namespace Hangman
         public void GenerateWord()
         {
             string[] lines = System.IO.File.ReadAllLines("../../.././data/words.txt");
-            word = lines[new Random().Next(lines.Length)];
+            Word = lines[new Random().Next(lines.Length)];
             guessedWord = new StringBuilder();
 
-            for(int i=0; i<word.Length; i++)
+            for(int i=0; i<Word.Length; i++)
                 guessedWord.Append('_');
         }
         
@@ -86,23 +86,23 @@ namespace Hangman
             turn++;
         }
         
-        private void CheckWinLoss()
+        public void CheckWinLoss()
         {
             if (lives == 0)
             {
-                DrawHangman();
+                //DrawHangman();
                 Console.WriteLine("----------------------------------");
                 Console.WriteLine("You have lost the Game!");
-                Console.WriteLine($"Word = {word}, Current word = {guessedWord}");
-                hasLost = true;
+                Console.WriteLine($"Word = {Word}, Current word = {guessedWord}");
+                gameEnded = true;
             }
-            else if (guessedWord.Equals(word))
+            else if (guessedWord.Equals(Word))
             {
                 Console.WriteLine("----------------------------------");
                 Console.WriteLine("You have won the game!");
                 //todo change word if game won then change the word and display message
                 //todo reset all variables
-                hasLost = true; //todo change this
+                gameEnded = true; //todo change this
             }
         }
 
@@ -118,7 +118,7 @@ namespace Hangman
 
         public string GetWord()
         {
-            return word;
+            return Word;
         }
 
         public StringBuilder GetGuessedWord()

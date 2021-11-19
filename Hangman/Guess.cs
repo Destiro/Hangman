@@ -20,7 +20,7 @@ namespace Hangman
             Boolean addedLetter = false;
             StringBuilder guessedWord = hangmanGamemode.GetGuessedWord();
 
-            if (hangmanGamemode.GetGuesses().Contains(guess))
+            if (hangmanGamemode.GetGuesses().Contains(guess) || !Char.IsLetter(guess))
                 return;
 
             guesses.Add(guess);
