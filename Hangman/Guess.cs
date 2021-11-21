@@ -22,7 +22,7 @@ namespace Hangman
 
             if (hangmanGamemode.GetGuesses().Contains(guess) || !Char.IsLetter(guess))
                 return;
-
+            
             guesses.Add(guess);
             hangmanGamemode.SetGuesses(guesses);
 
