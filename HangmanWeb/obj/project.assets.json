@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "Hangman/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Hangman.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Hangman.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Hangman/1.0.0": {
+      "type": "project",
+      "path": "../Hangman/Hangman.csproj",
+      "msbuildProject": "../Hangman/Hangman.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "Hangman >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\connor.debruyn\\.nuget\\packages\\": {},
@@ -36,7 +55,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\connor.debruyn\\RiderProjects\\Hangman\\Hangman\\Hangman.csproj": {
+              "projectPath": "C:\\Users\\connor.debruyn\\RiderProjects\\Hangman\\Hangman\\Hangman.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

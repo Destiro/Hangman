@@ -33,7 +33,7 @@ namespace HangmanTests
             HangmanGamemode hmgmode = new HangmanGamemode("Guess added correctly test");
             hmgmode.Word = "abc";
             for(int i=0; i<hmgmode.Word.Length; i++)
-                hmgmode.guessedWord.Append('_');
+                hmgmode.GuessedWord.Append('_');
             
             Assert.Empty(hmgmode.GetGuesses());
             new Guess("a", hmgmode);
@@ -60,24 +60,24 @@ namespace HangmanTests
             HangmanGamemode hmgmode = new HangmanGamemode("Able to Win test");
             hmgmode.Word = "hello";
             for(int i=0; i<hmgmode.Word.Length; i++)
-                hmgmode.guessedWord.Append('_');
-            Assert.False(hmgmode.gameEnded);
+                hmgmode.GuessedWord.Append('_');
+            Assert.False(hmgmode.GameEnded);
             
             new Guess("h", hmgmode);
             hmgmode.CheckWinLoss();
-            Assert.False(hmgmode.gameEnded);
+            Assert.False(hmgmode.GameEnded);
             
             new Guess("e", hmgmode);
             hmgmode.CheckWinLoss();
-            Assert.False(hmgmode.gameEnded);
+            Assert.False(hmgmode.GameEnded);
             
             new Guess("l", hmgmode);
             hmgmode.CheckWinLoss();
-            Assert.False(hmgmode.gameEnded);
+            Assert.False(hmgmode.GameEnded);
             
             new Guess("o", hmgmode);
             hmgmode.CheckWinLoss();
-            Assert.True(hmgmode.gameEnded);
+            Assert.True(hmgmode.GameEnded);
         }
 
         [Fact]
@@ -86,7 +86,7 @@ namespace HangmanTests
             HangmanGamemode hmgmode = new HangmanGamemode("Able to add double letters test");
             hmgmode.Word = "abcabcab";
             for(int i=0; i<hmgmode.Word.Length; i++)
-                hmgmode.guessedWord.Append('_');
+                hmgmode.GuessedWord.Append('_');
             
             new Guess("c", hmgmode);
             Assert.Equal("__c__c__", hmgmode.GetGuessedWord().ToString());
@@ -101,13 +101,13 @@ namespace HangmanTests
             HangmanGamemode hmgmode = new HangmanGamemode("Able to decrease lives test");
             hmgmode.Word = "a";
             
-            Assert.Equal(8, hmgmode.lives);
+            Assert.Equal(8, hmgmode.Lives);
             
             hmgmode.DecreaseLives();
-            Assert.Equal(7, hmgmode.lives);
+            Assert.Equal(7, hmgmode.Lives);
             
             new Guess("b", hmgmode);
-            Assert.Equal(6, hmgmode.lives);
+            Assert.Equal(6, hmgmode.Lives);
         }
 
         [Fact]
@@ -121,7 +121,7 @@ namespace HangmanTests
                 new Guess(makeGuesses[i].ToString(), hmgmode);
                 hmgmode.CheckWinLoss();
             }
-            Assert.True(hmgmode.gameEnded);
+            Assert.True(hmgmode.GameEnded);
         }
         
         [Fact]
@@ -136,11 +136,11 @@ namespace HangmanTests
             new Guess("C", hmgmode);
             Assert.True(hmgmode.GetGuesses().Contains('c'));
 
-            int currLives = hmgmode.lives;
+            int currLives = hmgmode.Lives;
             
             new Guess("c", hmgmode);
             Assert.True(hmgmode.GetGuesses().Contains('c'));
-            Assert.True(hmgmode.lives == currLives);
+            Assert.True(hmgmode.Lives == currLives);
 
         }
         
