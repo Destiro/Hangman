@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hangman.UnitTest", "Hangman
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangmanWeb", "HangmanWeb\HangmanWeb.csproj", "{91E2EF2C-F378-4460-813A-B861291313FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangmanConsoleUI", "HangmanConsoleUI\HangmanConsoleUI.csproj", "{33CF2766-A87C-4AC4-9C9B-B9DC40A9A268}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{91E2EF2C-F378-4460-813A-B861291313FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91E2EF2C-F378-4460-813A-B861291313FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91E2EF2C-F378-4460-813A-B861291313FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33CF2766-A87C-4AC4-9C9B-B9DC40A9A268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33CF2766-A87C-4AC4-9C9B-B9DC40A9A268}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33CF2766-A87C-4AC4-9C9B-B9DC40A9A268}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33CF2766-A87C-4AC4-9C9B-B9DC40A9A268}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

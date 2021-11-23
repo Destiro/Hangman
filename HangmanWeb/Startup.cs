@@ -13,12 +13,15 @@ namespace HangmanWeb
 {
     public class Startup
     {
-        private HangmanGamemode _lastGame;
+        private Game _lastGame;
         
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var game = new Game();
+            services.AddSingleton(game);
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,19 +31,20 @@ namespace HangmanWeb
             {
                 app.UseDeveloperExceptionPage();
             }
-            
             app.UseRouting();
-            if(_lastGame == null)
-                _lastGame = new HangmanGamemode(true);
+            // if(_lastGame == null)
+            //     _lastGame = new HangmanGamemode(true);
             
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapGet("/", async context =>
                 {
-                    HangmanGamemode newGame = new HangmanGamemode(_lastGame, () => Configure(app, env));
-                    _lastGame = newGame;
-                    foreach(var line in _lastGame.WebLines)
-                        await context.Response.WriteAsync("<p>"+line+"</p>");
+                    await context.Response.WriteAsync("asdf");
+                    // HangmanGamemode newGame = new HangmanGamemode(_lastGame, () => Configure(app, env));
+                    // _lastGame = newGame;
+                    // foreach(var line in _lastGame.WebLines)
+                    //     await context.Response.WriteAsync("<p>"+line+"</p>");
                 });
             });
         }

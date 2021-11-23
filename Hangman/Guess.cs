@@ -6,26 +6,48 @@ namespace Hangman
 {
     public class Guess
     {
-        public Guess(string guess, HangmanGamemode hangmanGamemode)
+        private ArrayList guesses;
+        private string word;
+        private StringBuilder guessedWord;
+        private Game Game;
+        public Guess(string guess, Game game)
         {
-            guess = guess?.ToLower();
-            if (guess != null && guess.Length == 1)
-                CheckGuess(char.Parse(guess), hangmanGamemode);
+            guessedWord = game.GetGuessedWord();
+            guesses = game.GetGuesses();
+            word = game.GetWord();
+            Game = game;
+
+            if (ValidLength(guess) && ValidGuess(char.Parse(guess.ToLower())))
+            {
+                var guessChar = char.Parse(guess.ToLower());
+                guesses.Add(guessChar);
+                Game.SetGuesses(guesses);
+                
+                if (CheckInWord(guessChar))
+                {
+                    game.SetGuessedWord(guessedWord);
+                }
+                else
+                {
+                    game.DecreaseLives();
+                }
+            }
         }
 
-        private void CheckGuess(char guess, HangmanGamemode hangmanGamemode)
+        public bool ValidLength(string guess)
         {
-            ArrayList guesses = hangmanGamemode.GetGuesses();
-            string word = hangmanGamemode.GetWord();
+            return guess != null && guess.Length == 1;
+        }
+
+        private bool ValidGuess(char guess)
+        {
+            return !Game.GetGuesses().Contains(guess) && char.IsLetter(guess);
+        }
+
+        private bool CheckInWord(char guess)
+        {
             Boolean addedLetter = false;
-            StringBuilder guessedWord = hangmanGamemode.GetGuessedWord();
-
-            if (hangmanGamemode.GetGuesses().Contains(guess) || !Char.IsLetter(guess))
-                return;
             
-            guesses.Add(guess);
-            hangmanGamemode.SetGuesses(guesses);
-
             for (var i = 0; i < word.Length; i++)
             {
                 if (word[i].Equals(guess))
@@ -35,14 +57,7 @@ namespace Hangman
                 }
             }
 
-            if (addedLetter)
-            {
-                hangmanGamemode.SetGuessedWord(guessedWord);
-            }
-            else
-            {
-                hangmanGamemode.DecreaseLives();
-            }
+            return addedLetter;
         }
     }
 }

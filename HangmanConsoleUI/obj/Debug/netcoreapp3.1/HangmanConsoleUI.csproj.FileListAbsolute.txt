@@ -1,0 +1,17 @@
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\bin\Debug\netcoreapp3.1\Hangman.exe
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\bin\Debug\netcoreapp3.1\HangmanConsoleUI.exe
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\bin\Debug\netcoreapp3.1\HangmanConsoleUI.deps.json
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\bin\Debug\netcoreapp3.1\HangmanConsoleUI.runtimeconfig.json
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\bin\Debug\netcoreapp3.1\HangmanConsoleUI.runtimeconfig.dev.json
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\bin\Debug\netcoreapp3.1\HangmanConsoleUI.dll
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\bin\Debug\netcoreapp3.1\HangmanConsoleUI.pdb
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\bin\Debug\netcoreapp3.1\Hangman.dll
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\bin\Debug\netcoreapp3.1\Hangman.pdb
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\obj\Debug\netcoreapp3.1\HangmanConsoleUI.csprojAssemblyReference.cache
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\obj\Debug\netcoreapp3.1\HangmanConsoleUI.AssemblyInfoInputs.cache
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\obj\Debug\netcoreapp3.1\HangmanConsoleUI.AssemblyInfo.cs
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\obj\Debug\netcoreapp3.1\HangmanConsoleUI.csproj.CoreCompileInputs.cache
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\obj\Debug\netcoreapp3.1\HangmanConsoleUI.csproj.CopyComplete
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\obj\Debug\netcoreapp3.1\HangmanConsoleUI.dll
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\obj\Debug\netcoreapp3.1\HangmanConsoleUI.pdb
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanConsoleUI\obj\Debug\netcoreapp3.1\HangmanConsoleUI.genruntimeconfig.cache
