@@ -8,4 +8,8 @@
       <ProjectReference Include="..\Hangman\Hangman.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="data\drawings" />
+    </ItemGroup>
+
 </Project>
