@@ -84,8 +84,8 @@ namespace HangmanTests
 
             Assert.Empty(hmgmode.GetGuesses());
             Assert.Equal("___", hmgmode.GuessedWord.ToString());
-
-            new Guess("a", hmgmode);
+            
+            hmgmode.MakeGuess("a");
             Assert.NotEmpty(hmgmode.GetGuesses());
             Assert.Equal("a__", hmgmode.GuessedWord.ToString());
         }
@@ -98,7 +98,7 @@ namespace HangmanTests
             Assert.Empty(hmgmode.GetGuesses());
             Assert.Equal("___", hmgmode.GuessedWord.ToString());
 
-            new Guess("d", hmgmode);
+            hmgmode.MakeGuess("d");
             Assert.NotEmpty(hmgmode.GetGuesses());
             Assert.Equal("___", hmgmode.GuessedWord.ToString());
         }
@@ -110,10 +110,10 @@ namespace HangmanTests
             hmgmode.Word = "hello";
             Assert.Empty(hmgmode.GetGuesses());
 
-            new Guess("a", hmgmode);
+            hmgmode.MakeGuess("a");
             Assert.True(1 == hmgmode.GetGuesses().Count);
 
-            new Guess("a", hmgmode);
+            hmgmode.MakeGuess("a");
             Assert.True(1 == hmgmode.GetGuesses().Count);
         }
 
@@ -123,16 +123,16 @@ namespace HangmanTests
             Game hmgmode = CreateTestGame("hello");
             Assert.False(hmgmode.CheckGameEnd());
 
-            new Guess("h", hmgmode);
+            hmgmode.MakeGuess("h");
             Assert.False(hmgmode.CheckGameEnd());
 
-            new Guess("e", hmgmode);
+            hmgmode.MakeGuess("e");
             Assert.False(hmgmode.CheckGameEnd());
 
-            new Guess("l", hmgmode);
+            hmgmode.MakeGuess("l");
             Assert.False(hmgmode.CheckGameEnd());
 
-            new Guess("o", hmgmode);
+            hmgmode.MakeGuess("o");
             Assert.True(hmgmode.CheckGameEnd());
         }
 
@@ -152,10 +152,10 @@ namespace HangmanTests
         {
             Game hmgmode = CreateTestGame("abcabcab");
 
-            new Guess("c", hmgmode);
+            hmgmode.MakeGuess("c");
             Assert.Equal("__c__c__", hmgmode.GetGuessedWord().ToString());
 
-            new Guess("a", hmgmode);
+            hmgmode.MakeGuess("a");
             Assert.Equal("a_ca_ca_", hmgmode.GetGuessedWord().ToString());
         }
 
@@ -169,7 +169,7 @@ namespace HangmanTests
             hmgmode.DecreaseLives();
             Assert.Equal(7, hmgmode.Lives);
 
-            new Guess("b", hmgmode);
+            hmgmode.MakeGuess("b");
             Assert.Equal(6, hmgmode.Lives);
         }
 
@@ -179,7 +179,7 @@ namespace HangmanTests
             Game hmgmode = CreateTestGame("a");
             string makeGuesses = "bcdefghijk";
             for (int i = 0; i < 8; i++)
-                new Guess(makeGuesses[i].ToString(), hmgmode);
+                hmgmode.MakeGuess(makeGuesses[i].ToString());
 
             Assert.True(hmgmode.CheckGameEnd());
         }
@@ -189,15 +189,15 @@ namespace HangmanTests
         {
             Game hmgmode = CreateTestGame("a");
 
-            new Guess("b", hmgmode);
+            hmgmode.MakeGuess("b");
             Assert.True(hmgmode.GetGuesses().Contains('b'));
 
-            new Guess("C", hmgmode);
+            hmgmode.MakeGuess("C");
             Assert.True(hmgmode.GetGuesses().Contains('c'));
 
             int currLives = hmgmode.Lives;
 
-            new Guess("c", hmgmode);
+            hmgmode.MakeGuess("c");
             Assert.True(hmgmode.GetGuesses().Contains('c'));
             Assert.True(hmgmode.Lives == currLives);
         }
@@ -209,7 +209,7 @@ namespace HangmanTests
             Game hmgmode = CreateTestGame("a");
             Assert.Empty(hmgmode.GetGuesses());
 
-            new Guess("%", hmgmode);
+            hmgmode.MakeGuess("%");
             Assert.Empty(hmgmode.GetGuesses());
         }
 
@@ -219,7 +219,7 @@ namespace HangmanTests
             Game hmgmode = CreateTestGame("a");
             Assert.Empty(hmgmode.GetGuesses());
 
-            new Guess("multiple chars", hmgmode);
+            hmgmode.MakeGuess("multiple chars");
             Assert.Empty(hmgmode.GetGuesses());
         }
     }

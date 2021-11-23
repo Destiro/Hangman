@@ -13,7 +13,7 @@ namespace HangmanWeb
 {
     public class Startup
     {
-        private Game _lastGame;
+        public static Game Game;
         
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -21,6 +21,7 @@ namespace HangmanWeb
         {
             var game = new Game();
             services.AddSingleton(game);
+            services.AddRazorPages(c=>c.RootDirectory = "/PagesRootDir");
             services.AddControllers();
         }
 
@@ -32,20 +33,19 @@ namespace HangmanWeb
                 app.UseDeveloperExceptionPage();
             }
             app.UseRouting();
-            // if(_lastGame == null)
-            //     _lastGame = new HangmanGamemode(true);
-            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("asdf");
-                    // HangmanGamemode newGame = new HangmanGamemode(_lastGame, () => Configure(app, env));
-                    // _lastGame = newGame;
-                    // foreach(var line in _lastGame.WebLines)
-                    //     await context.Response.WriteAsync("<p>"+line+"</p>");
-                });
+                // endpoints.MapGet("/", async context =>
+                // {
+                //     // await context.Response.WriteAsync("Hello! Welcome to le hangman game.\n"+
+                //     //                                   "To play you need to find the hidden word, Take a turn by " +
+                //     //                                   "guessing a letter and once\nthe word is found, you win the " +
+                //     //                                   "game. But if you run out of lives, you lose the game.\n" +
+                //     //                                   "<a href='/game'>Click Me!</a>");
+                // });
+                endpoints.MapControllerRoute("default","{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

@@ -14,7 +14,6 @@ using static Microsoft.AspNetCore.Mvc.Razor.RazorPage;
 namespace HangmanWeb
 {
     public class HangmanWeb
-    
     {
         public static void Main(string[] args)
         {

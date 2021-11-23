@@ -51,11 +51,6 @@ namespace Hangman
             return GuessedWord;
         }
 
-        public void SetGuessedWord(StringBuilder guessedWord)
-        {
-            GuessedWord = guessedWord;
-        }
-
         public void DecreaseLives()
         {
             Lives--;
@@ -64,6 +59,26 @@ namespace Hangman
         public void NextTurn()
         {
             Turn++;
+        }
+
+        public void MakeGuess(string guess)
+        {
+            Guess makeGuess = new Guess(guess);
+            Word currentWord = new Word(Word);//todo set when generated
+            if (makeGuess.ValidLength() && makeGuess.ValidGuess(Guesses))
+            {
+                var guessChar = char.Parse(guess.ToLower());
+                Guesses.Add(guessChar);
+
+                if (currentWord.CheckInWord(guessChar))
+                {
+                    GuessedWord = currentWord.AddGuesses(GuessedWord, guessChar);
+                }
+                else
+                {
+                    DecreaseLives();
+                }
+            }
         }
     }
 }

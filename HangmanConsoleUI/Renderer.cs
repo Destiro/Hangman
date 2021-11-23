@@ -29,7 +29,7 @@ namespace HangmanConsoleUI
             Console.WriteLine("Press Enter to continue.");
         }
 
-        public void PrintHeader()
+        public void PrintHeader() //todo parse in variables
         {
             Console.WriteLine("----------------------------------");
             Console.WriteLine($"Turn: {Game.Turn} || Lives: {Game.Lives} || Current word : {Game.GuessedWord}");

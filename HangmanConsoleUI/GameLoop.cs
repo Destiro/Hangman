@@ -11,7 +11,7 @@ namespace Hangman
         public GameLoop()
         {
             Game = new Game();
-            Renderer = new Renderer(Game);
+            Renderer = new Renderer(Game); //todo make methods static
             Renderer.PrintIntroduction();
             Console.ReadLine();
             Game.GenerateWord();
@@ -33,7 +33,7 @@ namespace Hangman
         private void TakeTurn()
         {
             Console.Write("\nPlease take a guess: ");
-            new Guess(Console.ReadLine(), Game);
+            Game.MakeGuess(Console.ReadLine());
             Game.NextTurn();
         }
     }

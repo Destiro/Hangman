@@ -22,3 +22,15 @@ C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\bin\Debug\netcoreapp3.1
 C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\bin\Debug\netcoreapp3.1\Hangman.dll
 C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\bin\Debug\netcoreapp3.1\Hangman.pdb
 C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.csproj.CopyComplete
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\bin\Debug\netcoreapp3.1\HangmanWeb.Views.dll
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\bin\Debug\netcoreapp3.1\HangmanWeb.Views.pdb
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.RazorAssemblyInfo.cache
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.RazorAssemblyInfo.cs
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.TagHelpers.input.cache
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.TagHelpers.output.cache
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.RazorCoreGenerate.cache
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\PagesRootDir\Razor.cshtml.g.cs
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.RazorTargetAssemblyInfo.cs
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.Views.pdb
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\PagesRootDir\Index.cshtml.g.cs
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\PagesRootDir\Game\TakeTurn.cshtml.g.cs
