@@ -13,7 +13,7 @@ namespace Hangman
         public int Turn;
         public void GenerateWord()
         {
-            string[] lines = System.IO.File.ReadAllLines("../../.././data/words.txt");
+            string[] lines = System.IO.File.ReadAllLines("./data/words.txt");
             Word = lines[new Random().Next(lines.Length)];
             GuessedWord = new StringBuilder();
 

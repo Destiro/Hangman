@@ -13,32 +13,19 @@ namespace HangmanWeb
         {
             _game = Game;
         }
-        
-        // public IActionResult SetupGame()
-        // {
-        //     return Ok("Im in a game");
-        // }
-        //
-        // [HttpGet]
-        // public void TakeGuess()
-        // {
-        //     
-        // }
 
-        // [HttpGet]
-        // public IActionResult TakeTurn()
-        // {
-        //     //return ViewComponent();
-        // }
-        
         [HttpPost]
         public IActionResult Post(string info)
         {
-            Console.WriteLine(info);
-            Console.WriteLine("controller taketurn");
-            //_game.makeguess()
-            //RedirectToRoute()
-            _game.DecreaseLives();
+            _game.MakeGuess(Request.Form["takeGuess"]);
+            _game.NextTurn();
+            
+            if (_game.CheckGameEnd() && !_game.HasWon())
+                return RedirectToPage("/Game/LoseGame");
+            
+            if (_game.CheckGameEnd() && _game.HasWon())
+                return RedirectToPage("/Game/WinGame");
+                
             return RedirectToPage("/Game/TakeTurn");
         }
     }

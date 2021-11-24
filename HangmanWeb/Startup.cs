@@ -21,6 +21,7 @@ namespace HangmanWeb
         public void ConfigureServices(IServiceCollection services)
         {
             var game = new Game();
+            game.GenerateWord();
             //game.GenerateWord();
             services.AddSingleton(game);
             services.AddRazorPages(c=>

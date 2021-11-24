@@ -11,12 +11,6 @@ namespace HangmanWeb.PagesRootDir.Game
         {
             _game = Game;
         }
-        
-        public void OnGet()
-        {
-            Console.WriteLine("get methpod");
-
-        }
 
         public string GetTurn()
         {
@@ -47,21 +41,6 @@ namespace HangmanWeb.PagesRootDir.Game
         {
             return "https://raw.githubusercontent.com/Destiro/Hangman/add-to-web/HangmanWeb/data/drawings/hangman_" +
                    _game.Lives + ".png";
-        }
-
-        public void TurnLogic()
-        {
-            
-        }
-    
-        public PageResult OnPost()
-        {
-            Console.WriteLine("post methpod");
-            var guess = Request.Form["takeGuess"];
-            Console.WriteLine($"Guess taken: {guess}");
-            _game.DecreaseLives();
-            _game.NextTurn();
-            return Page();
         }
     }
 }
