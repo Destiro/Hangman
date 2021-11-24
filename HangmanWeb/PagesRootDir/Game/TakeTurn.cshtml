@@ -7,14 +7,23 @@
 
 <!DOCTYPE html>
 
-<html>
+<html style="text-align: center; justify-content: center; align-items: center;">
 <head>
-    <title></title>
+    <title>Hangman Game</title>
 </head>
 <body>
 <div>
-    @Model.GetString()
-    Take Guess
+    <div>
+        <img src=@Model.GetDrawingUrl() style="width:800px; height: 500px;">
+    </div>
+    <div>
+        <h3> Turn: @Model.GetTurn(), Lives: @Model.GetLives(), Guessed Word: @Model.GetGuessedWord()</h3>
+        <h3> Current Guesses: @Model.GetGuesses()</h3>
+        <form method = "post">
+            Take A Guess (1 char): <input type = "text" name = "takeGuess" />
+            <input type = "submit" name = "submit" value = "Submit" />
+        </form>
+    </div>
 </div>
 </body>
 </html>

@@ -6,6 +6,7 @@ using Hangman;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -20,8 +21,13 @@ namespace HangmanWeb
         public void ConfigureServices(IServiceCollection services)
         {
             var game = new Game();
+            //game.GenerateWord();
             services.AddSingleton(game);
-            services.AddRazorPages(c=>c.RootDirectory = "/PagesRootDir");
+            services.AddRazorPages(c=>
+            {
+                c.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
+                c.RootDirectory = "/PagesRootDir";
+            });
             services.AddControllers();
         }
 
@@ -36,14 +42,6 @@ namespace HangmanWeb
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                // endpoints.MapGet("/", async context =>
-                // {
-                //     // await context.Response.WriteAsync("Hello! Welcome to le hangman game.\n"+
-                //     //                                   "To play you need to find the hidden word, Take a turn by " +
-                //     //                                   "guessing a letter and once\nthe word is found, you win the " +
-                //     //                                   "game. But if you run out of lives, you lose the game.\n" +
-                //     //                                   "<a href='/game'>Click Me!</a>");
-                // });
                 endpoints.MapControllerRoute("default","{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });

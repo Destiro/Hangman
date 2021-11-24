@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HangmanWeb
 {
-    [Route("game")]
+    [Route("Game/TakeTurn")]
     public class GameController : ControllerBase
     {
         private readonly Game _game;
@@ -14,31 +14,32 @@ namespace HangmanWeb
             _game = Game;
         }
         
-        [HttpGet]
-        public IActionResult SetupGame()
-        {
-            return Ok("Im in a game");
-        }
-        
-        [HttpGet]
-        public void TakeGuess()
-        {
-            
-        }
+        // public IActionResult SetupGame()
+        // {
+        //     return Ok("Im in a game");
+        // }
+        //
+        // [HttpGet]
+        // public void TakeGuess()
+        // {
+        //     
+        // }
 
-        [HttpGet]
-        public IActionResult TakeTurn()
-        {
-            return Ok("Hello");
-        }
+        // [HttpGet]
+        // public IActionResult TakeTurn()
+        // {
+        //     //return ViewComponent();
+        // }
         
         [HttpPost]
-        public IActionResult TakeTurn(string info)
+        public IActionResult Post(string info)
         {
             Console.WriteLine(info);
+            Console.WriteLine("controller taketurn");
             //_game.makeguess()
-            Redirect("/Game/TakeTurn");
-            return Ok("Hello");
+            //RedirectToRoute()
+            _game.DecreaseLives();
+            return RedirectToPage("/Game/TakeTurn");
         }
     }
 }
