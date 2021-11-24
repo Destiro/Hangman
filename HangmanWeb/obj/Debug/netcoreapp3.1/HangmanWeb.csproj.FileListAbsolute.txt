@@ -31,5 +31,5 @@ C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1
 C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.RazorCoreGenerate.cache
 C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.RazorTargetAssemblyInfo.cs
 C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.Views.pdb
-C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\PagesRootDir\Index.cshtml.g.cs
-C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\PagesRootDir\Game\TakeTurn.cshtml.g.cs
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\Views\Game\TakeTurn.cshtml.g.cs
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\Views\Index.cshtml.g.cs

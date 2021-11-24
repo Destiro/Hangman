@@ -23,12 +23,13 @@ namespace HangmanWeb
             var game = new Game();
             //game.GenerateWord();
             services.AddSingleton(game);
-            services.AddRazorPages(c=>
-            {
-                c.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
-                c.RootDirectory = "/PagesRootDir";
-            });
-            services.AddControllers();
+            services.AddMvc(options => options.EnableEndpointRouting = false );
+        //     services.AddRazorPages(c=>
+        //     {
+        //         c.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
+        //         c.RootDirectory = "/PagesRootDir";
+        //     });
+        //     services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,13 +39,14 @@ namespace HangmanWeb
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapControllerRoute("default","{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-            });
+            //app.UseRouting();
+            app.UseMvc();
+            // app.UseEndpoints(endpoints =>
+            // {
+            //     endpoints.MapControllers();
+            //     endpoints.MapControllerRoute("default","{controller=Home}/{action=Index}/{id?}");
+            //     endpoints.MapRazorPages();
+            // });
         }
     }
 }

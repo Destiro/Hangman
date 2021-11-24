@@ -1,11 +1,4 @@
-﻿@page
-@model HangmanWeb.PagesRootDir.Game.TakeTurn
-
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html style="text-align: center; justify-content: center; align-items: center;">
 <head>
@@ -14,7 +7,7 @@
 <body>
 <div>
     <div>
-        <img src=@Model.GetDrawingUrl() style="width:800px; height: 500px;">
+        <img src="https://raw.githubusercontent.com/Destiro/Hangman/add-to-web/HangmanWeb/data/drawings/hangman_@Model.GetLives().png" style="width:800px; height: 500px;">
     </div>
     <div>
         <h3> Turn: @Model.GetTurn(), Lives: @Model.GetLives(), Guessed Word: @Model.GetGuessedWord()</h3>

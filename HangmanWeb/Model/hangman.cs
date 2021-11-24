@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HangmanWeb.PagesRootDir.Game
+namespace HangmanWeb.Model
 {
-    public class TakeTurn : PageModel
+    public class Hangman
     {
         private readonly Hangman.Game _game;
 

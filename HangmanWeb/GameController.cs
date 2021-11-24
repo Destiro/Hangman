@@ -2,10 +2,12 @@
 using Hangman;
 using Microsoft.AspNetCore.Mvc;
 
+
+
 namespace HangmanWeb
 {
     [Route("Game/TakeTurn")]
-    public class GameController : ControllerBase
+    public class GameController : Controller
     {
         private readonly Game _game;
 
@@ -19,11 +21,11 @@ namespace HangmanWeb
         //     return Ok("Im in a game");
         // }
         //
-        // [HttpGet]
-        // public void TakeGuess()
-        // {
-        //     
-        // }
+        [HttpGet]
+        public ViewResult TakeTurn()
+        {
+            return View(_game);
+        }
 
         // [HttpGet]
         // public IActionResult TakeTurn()
