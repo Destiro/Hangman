@@ -28,5 +28,10 @@ namespace Hangman
             
             return currGuesses;
         }
+
+        public string GetWord()
+        {
+            return _word;
+        }
     }
 }

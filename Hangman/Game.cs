@@ -6,7 +6,7 @@ namespace Hangman
 {
     public class Game
     {
-        private string _word;
+        private Word _word = new Word("");
         private StringBuilder _guessedWord = new StringBuilder("");
         private int _lives = 8;
         private readonly ArrayList _guesses = new ArrayList();
@@ -22,25 +22,24 @@ namespace Hangman
         public void GenerateWord(string path)
         {
             string[] lines = System.IO.File.ReadAllLines(path);
-            _word = lines[new Random().Next(lines.Length)];
+            _word = new Word(lines[new Random().Next(lines.Length)]);
             _guessedWord = new StringBuilder();
 
-            for(int i=0; i<_word.Length; i++)
+            for(int i=0; i<_word.GetWord().Length; i++)
                 _guessedWord.Append('_');
         }
         
         public void MakeGuess(string guess)
         {
             var makeGuess = new Guess(guess);
-            var currentWord = new Word(_word);//todo set when generated
-            
+
             if (!makeGuess.ValidLength() || !makeGuess.ValidGuess(_guesses)) return;
             var guessChar = char.Parse(guess.ToLower());
             _guesses.Add(guessChar);
 
-            if (currentWord.CheckInWord(guessChar))
+            if (_word.CheckInWord(guessChar))
             {
-                _guessedWord = currentWord.AddGuesses(_guessedWord, guessChar);
+                _guessedWord = _word.AddGuesses(_guessedWord, guessChar);
             }
             else
             {
@@ -50,12 +49,12 @@ namespace Hangman
 
         public bool CheckGameEnd()
         {
-            return _lives == 0 || _guessedWord.Equals(_word);
+            return _lives == 0 || _guessedWord.Equals(GetWord());
         }
 
         public bool HasWon()
         {
-            return _guessedWord.ToString().Equals(_word);
+            return _guessedWord.ToString().Equals(GetWord());
         }
         
         public void SetGuessedWord(StringBuilder newGuessedWord)
@@ -70,7 +69,7 @@ namespace Hangman
 
         public void SetWord(string newWord)
         {
-            _word = newWord;
+            _word = new Word(newWord);
         }
 
         public ArrayList GetGuesses()
@@ -80,7 +79,7 @@ namespace Hangman
 
         public string GetWord()
         {
-            return _word;
+            return _word.GetWord();
         }
 
         public int GetTurn()

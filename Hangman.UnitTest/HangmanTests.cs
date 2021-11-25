@@ -36,7 +36,7 @@ namespace HangmanTests
             Assert.Empty(hmgmode.GetGuesses());
             Assert.True(hmgmode.GetTurn() == 0);
             Assert.True(hmgmode.GetLives() == 8);
-            Assert.Null(hmgmode.GetWord());
+            Assert.Equal("", hmgmode.GetWord());
             Assert.True(hmgmode.GetGuessedWord().ToString().Equals(""));
         }
 
@@ -72,7 +72,7 @@ namespace HangmanTests
         public void WordGeneratedTest()
         {
             Game hmgmode = new Game();
-            Assert.Null(hmgmode.GetWord());
+            Assert.Equal("",hmgmode.GetWord());
             Assert.Equal("", hmgmode.GetGuessedWord().ToString());
 
             hmgmode.GenerateWord("../../.././data/words.txt");
