@@ -8,25 +8,25 @@ namespace HangmanWeb.PagesRootDir.Game
     {
         private readonly Hangman.Game _game;
 
-        public TakeTurn(Hangman.Game Game)
+        public TakeTurn(Hangman.Game game)
         {
-            _game = Game;
+            _game = game;
         }
 
         public string GetTurn()
         {
-            return _game.Turn.ToString();
+            return _game.GetTurn().ToString();
         }
         
         public string GetLives()
         {
-            return _game.Lives.ToString();
+            return _game.GetLives().ToString();
         }
         
         public string GetGuessedWord()
         {
             string readableWord = "";
-            foreach (var letter in _game.GuessedWord.ToString())
+            foreach (var letter in _game.GetGuessedWord().ToString())
                 readableWord += letter + " ";
             
             return readableWord;
@@ -35,7 +35,7 @@ namespace HangmanWeb.PagesRootDir.Game
         public string GetGuesses()
         {
             var guesses = "";
-            foreach(var guess in _game.Guesses)
+            foreach(var guess in _game.GetGuesses())
             {
                 guesses += guess + " ";
             }
@@ -45,7 +45,7 @@ namespace HangmanWeb.PagesRootDir.Game
         public string GetDrawingUrl()
         {
             return "https://raw.githubusercontent.com/Destiro/Hangman/add-to-web/HangmanWeb/data/drawings/hangman_" +
-                   _game.Lives + ".png";
+                   _game.GetLives() + ".png";
         }
         public IActionResult OnPost()
         {

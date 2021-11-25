@@ -1,21 +1,16 @@
 ﻿using System;
+using System.Collections;
+using System.Text;
 using Hangman;
 
 namespace HangmanConsoleUI
 {
     public class Renderer
     {
-        public Game Game;
-
-        public Renderer(Game game)
-        {
-            Game = game;
-        }
-
-        public void DrawHangman()
+        public static void DrawHangman(int Lives)
         {
             Console.Clear();
-            string[] lines = System.IO.File.ReadAllLines($"../../.././data/hangman_{Game.Lives}.txt");
+            string[] lines = System.IO.File.ReadAllLines($"../../.././data/hangman_{Lives}.txt");
             foreach (var line in lines)
                 Console.WriteLine(line);
         }
@@ -29,25 +24,25 @@ namespace HangmanConsoleUI
             Console.WriteLine("Press Enter to continue.");
         }
 
-        public void PrintHeader() //todo parse in variables
+        public static void PrintHeader(int Turn, int Lives, StringBuilder GuessedWord, ArrayList Guesses)
         {
             Console.WriteLine("----------------------------------");
-            Console.WriteLine($"Turn: {Game.Turn} || Lives: {Game.Lives} || Current word : {Game.GuessedWord}");
+            Console.WriteLine($"Turn: {Turn} || Lives: {Lives} || Current word : {GuessedWord}");
             Console.Write("Current Guesses: ");
 
-            foreach (char letter in Game.Guesses)
+            foreach (char letter in Guesses)
             {
                 Console.Write("{0} ", letter);
             }
         }
 
-        public void PrintWinLoss()
+        public static void PrintWinLoss(bool HasWon, string Word, StringBuilder GuessedWord)
         {
             Console.WriteLine("----------------------------------");
-            if (!Game.HasWon())
+            if (!HasWon)
             {
                 Console.WriteLine("You have lost the Game!");
-                Console.WriteLine($"Word = {Game.Word}, Current word = {Game.GuessedWord}");
+                Console.WriteLine($"Word = {Word}, Current word = {GuessedWord}");
             }
             else
             {

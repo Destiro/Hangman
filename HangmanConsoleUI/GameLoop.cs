@@ -5,36 +5,40 @@ namespace Hangman
 {
     public class GameLoop
     {
-        public Game Game;
-        public Renderer Renderer;
+        private readonly Game _game;
 
         public GameLoop()
         {
-            Game = new Game();
-            Renderer = new Renderer(Game); //todo make methods static
-            Renderer.PrintIntroduction();
-            Console.ReadLine();
-            Game.GenerateWord();
+            _game = new Game();
             Play();
         }
 
         private void Play()
         {
-            while (!Game.CheckGameEnd())
+            Startup();
+            
+            while (!_game.CheckGameEnd())
             {
-                Renderer.DrawHangman();
-                Renderer.PrintHeader();
+                Renderer.DrawHangman(_game.GetLives());
+                Renderer.PrintHeader(_game.GetTurn(), _game.GetLives(), _game.GetGuessedWord(), _game.GetGuesses());
                 TakeTurn();
             }
 
-            Renderer.PrintWinLoss();
+            Renderer.PrintWinLoss(_game.HasWon(), _game.GetWord(), _game.GetGuessedWord());
+        }
+
+        private void Startup()
+        {
+            Renderer.PrintIntroduction();
+            Console.ReadLine();
+            _game.GenerateWord("../../.././data/words.txt");
         }
 
         private void TakeTurn()
         {
             Console.Write("\nPlease take a guess: ");
-            Game.MakeGuess(Console.ReadLine());
-            Game.NextTurn();
+            _game.MakeGuess(Console.ReadLine());
+            _game.NextTurn();
         }
     }
 }

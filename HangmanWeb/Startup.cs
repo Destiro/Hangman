@@ -19,7 +19,7 @@ namespace HangmanWeb
         public void ConfigureServices(IServiceCollection services)
         {
             var game = new Game();
-            game.GenerateWord();
+            game.GenerateWord("./data/words.txt");
             services.AddSingleton(game);
             services.AddRazorPages(c=>
             {

@@ -19,9 +19,12 @@ namespace HangmanTests
         private Game CreateTestGame(string word)
         {
             Game hmgmode = new Game();
-            hmgmode.Word = word;
-            for (int i = 0; i < hmgmode.Word.Length; i++)
-                hmgmode.GuessedWord.Append('_');
+            hmgmode.SetWord(word);
+
+            StringBuilder newGuessedWord = new StringBuilder("");
+            for (int i = 0; i < word.Length; i++)
+                newGuessedWord.Append('_');
+            hmgmode.SetGuessedWord(newGuessedWord);
 
             return hmgmode;
         }
@@ -30,21 +33,21 @@ namespace HangmanTests
         public void InitializeEmptyGameCorrectlyTest()
         {
             Game hmgmode = new Game();
-            Assert.Empty(hmgmode.Guesses);
-            Assert.True(hmgmode.Turn == 0);
-            Assert.True(hmgmode.Lives == 8);
-            Assert.Null(hmgmode.Word);
-            Assert.True(hmgmode.GuessedWord.ToString().Equals(""));
+            Assert.Empty(hmgmode.GetGuesses());
+            Assert.True(hmgmode.GetTurn() == 0);
+            Assert.True(hmgmode.GetLives() == 8);
+            Assert.Null(hmgmode.GetWord());
+            Assert.True(hmgmode.GetGuessedWord().ToString().Equals(""));
         }
 
         [Fact]
         public void AbleToIncrementTurn()
         {
             Game hmgmode = new Game();
-            Assert.True(hmgmode.Turn == 0);
+            Assert.True(hmgmode.GetTurn() == 0);
 
             hmgmode.NextTurn();
-            Assert.True(hmgmode.Turn == 1);
+            Assert.True(hmgmode.GetTurn() == 1);
         }
 
         [Fact]
@@ -60,7 +63,7 @@ namespace HangmanTests
             Game hmgmode = CreateTestGame("abc");
             Assert.False(hmgmode.CheckGameEnd());
             Assert.False(hmgmode.HasWon());
-            hmgmode.GuessedWord = new StringBuilder(hmgmode.Word);
+            hmgmode.SetGuessedWord(new StringBuilder(hmgmode.GetWord()));
             Assert.True(hmgmode.CheckGameEnd());
             Assert.True(hmgmode.HasWon());
         }
@@ -72,7 +75,7 @@ namespace HangmanTests
             Assert.Null(hmgmode.GetWord());
             Assert.Equal("", hmgmode.GetGuessedWord().ToString());
 
-            hmgmode.GenerateWord();
+            hmgmode.GenerateWord("../../.././data/words.txt");
             Assert.NotNull(hmgmode.GetWord());
             Assert.True(hmgmode.GetWord().Length > 0);
         }
@@ -83,11 +86,11 @@ namespace HangmanTests
             Game hmgmode = CreateTestGame("abc");
 
             Assert.Empty(hmgmode.GetGuesses());
-            Assert.Equal("___", hmgmode.GuessedWord.ToString());
+            Assert.Equal("___", hmgmode.GetGuessedWord().ToString());
             
             hmgmode.MakeGuess("a");
             Assert.NotEmpty(hmgmode.GetGuesses());
-            Assert.Equal("a__", hmgmode.GuessedWord.ToString());
+            Assert.Equal("a__", hmgmode.GetGuessedWord().ToString());
         }
 
         [Fact]
@@ -96,18 +99,18 @@ namespace HangmanTests
             Game hmgmode = CreateTestGame("abc");
 
             Assert.Empty(hmgmode.GetGuesses());
-            Assert.Equal("___", hmgmode.GuessedWord.ToString());
+            Assert.Equal("___", hmgmode.GetGuessedWord().ToString());
 
             hmgmode.MakeGuess("d");
             Assert.NotEmpty(hmgmode.GetGuesses());
-            Assert.Equal("___", hmgmode.GuessedWord.ToString());
+            Assert.Equal("___", hmgmode.GetGuessedWord().ToString());
         }
 
         [Fact]
         public void DuplicateGuessTest()
         {
             Game hmgmode = new Game();
-            hmgmode.Word = "hello";
+            hmgmode.SetWord("hello");
             Assert.Empty(hmgmode.GetGuesses());
 
             hmgmode.MakeGuess("a");
@@ -142,7 +145,7 @@ namespace HangmanTests
             Game hmgmode = CreateTestGame("l");
             Assert.False(hmgmode.CheckGameEnd());
 
-            hmgmode.Lives = 0;
+            hmgmode.SetLives(0);
             Assert.True(hmgmode.CheckGameEnd());
             Assert.False(hmgmode.HasWon());
         }
@@ -164,13 +167,13 @@ namespace HangmanTests
         {
             Game hmgmode = CreateTestGame("a");
 
-            Assert.Equal(8, hmgmode.Lives);
+            Assert.Equal(8, hmgmode.GetLives());
 
             hmgmode.DecreaseLives();
-            Assert.Equal(7, hmgmode.Lives);
+            Assert.Equal(7, hmgmode.GetLives());
 
             hmgmode.MakeGuess("b");
-            Assert.Equal(6, hmgmode.Lives);
+            Assert.Equal(6, hmgmode.GetLives());
         }
 
         [Fact]
@@ -195,11 +198,11 @@ namespace HangmanTests
             hmgmode.MakeGuess("C");
             Assert.True(hmgmode.GetGuesses().Contains('c'));
 
-            int currLives = hmgmode.Lives;
+            int currLives = hmgmode.GetLives();
 
             hmgmode.MakeGuess("c");
             Assert.True(hmgmode.GetGuesses().Contains('c'));
-            Assert.True(hmgmode.Lives == currLives);
+            Assert.True(hmgmode.GetLives() == currLives);
         }
 
 

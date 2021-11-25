@@ -6,87 +6,106 @@ namespace Hangman
 {
     public class Game
     {
-        public string Word { get; set; }
-        public StringBuilder GuessedWord = new StringBuilder("");
-        public int Lives { get; set; } = 8;
-        public ArrayList Guesses = new ArrayList();
-        public int Turn;
+        private string _word;
+        private StringBuilder _guessedWord = new StringBuilder("");
+        private int _lives = 8;
+        private readonly ArrayList _guesses = new ArrayList();
+        private int _turn;
 
-        public void RestartGame()
+        public void RestartGame(string path)
         {
-            GenerateWord();
-            Guesses.Clear();
-            Turn = 0;
-            Lives = 8;
+            GenerateWord(path);
+            _guesses.Clear();
+            _turn = 0;
+            _lives = 8;
         }
-        public void GenerateWord()
+        public void GenerateWord(string path)
         {
-            string[] lines = System.IO.File.ReadAllLines("./data/words.txt");
-            Word = lines[new Random().Next(lines.Length)];
-            GuessedWord = new StringBuilder();
+            string[] lines = System.IO.File.ReadAllLines(path);
+            _word = lines[new Random().Next(lines.Length)];
+            _guessedWord = new StringBuilder();
 
-            for(int i=0; i<Word.Length; i++)
-                GuessedWord.Append('_');
+            for(int i=0; i<_word.Length; i++)
+                _guessedWord.Append('_');
+        }
+        
+        public void MakeGuess(string guess)
+        {
+            var makeGuess = new Guess(guess);
+            var currentWord = new Word(_word);//todo set when generated
+            
+            if (!makeGuess.ValidLength() || !makeGuess.ValidGuess(_guesses)) return;
+            var guessChar = char.Parse(guess.ToLower());
+            _guesses.Add(guessChar);
+
+            if (currentWord.CheckInWord(guessChar))
+            {
+                _guessedWord = currentWord.AddGuesses(_guessedWord, guessChar);
+            }
+            else
+            {
+                DecreaseLives();
+            }
         }
 
         public bool CheckGameEnd()
         {
-            return Lives == 0 || GuessedWord.Equals(Word);
+            return _lives == 0 || _guessedWord.Equals(_word);
         }
 
         public bool HasWon()
         {
-            return GuessedWord.ToString().Equals(Word);
+            return _guessedWord.ToString().Equals(_word);
+        }
+        
+        public void SetGuessedWord(StringBuilder newGuessedWord)
+        {
+            _guessedWord = newGuessedWord;
         }
 
-        public void SetGuesses(ArrayList guesses)
+        public void SetLives(int newLives)
         {
-            Guesses = guesses;
+            _lives = newLives;
+        }
+
+        public void SetWord(string newWord)
+        {
+            _word = newWord;
         }
 
         public ArrayList GetGuesses()
         {
-            return Guesses;
+            return _guesses;
         }
 
         public string GetWord()
         {
-            return Word;
+            return _word;
+        }
+
+        public int GetTurn()
+        {
+            return _turn;
         }
 
         public StringBuilder GetGuessedWord()
         {
-            return GuessedWord;
+            return _guessedWord;
         }
 
         public void DecreaseLives()
         {
-            Lives--;
+            _lives--;
         }
 
         public void NextTurn()
         {
-            Turn++;
+            _turn++;
         }
 
-        public void MakeGuess(string guess)
+        public int GetLives()
         {
-            Guess makeGuess = new Guess(guess);
-            Word currentWord = new Word(Word);//todo set when generated
-            if (makeGuess.ValidLength() && makeGuess.ValidGuess(Guesses))
-            {
-                var guessChar = char.Parse(guess.ToLower());
-                Guesses.Add(guessChar);
-
-                if (currentWord.CheckInWord(guessChar))
-                {
-                    GuessedWord = currentWord.AddGuesses(GuessedWord, guessChar);
-                }
-                else
-                {
-                    DecreaseLives();
-                }
-            }
+            return _lives;
         }
     }
 }
