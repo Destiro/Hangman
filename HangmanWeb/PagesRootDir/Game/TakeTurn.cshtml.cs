@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HangmanWeb.PagesRootDir.Game
@@ -24,12 +25,16 @@ namespace HangmanWeb.PagesRootDir.Game
         
         public string GetGuessedWord()
         {
-            return _game.GuessedWord.ToString();
+            string readableWord = "";
+            foreach (var letter in _game.GuessedWord.ToString())
+                readableWord += letter + " ";
+            
+            return readableWord;
         }
         
         public string GetGuesses()
         {
-            string guesses = "";
+            var guesses = "";
             foreach(var guess in _game.Guesses)
             {
                 guesses += guess + " ";
@@ -41,6 +46,19 @@ namespace HangmanWeb.PagesRootDir.Game
         {
             return "https://raw.githubusercontent.com/Destiro/Hangman/add-to-web/HangmanWeb/data/drawings/hangman_" +
                    _game.Lives + ".png";
+        }
+        public IActionResult OnPost()
+        {
+            _game.MakeGuess(Request.Form["takeGuess"]);
+            _game.NextTurn();
+            
+            if (_game.CheckGameEnd() && !_game.HasWon())
+                return RedirectToPage("/Game/LoseGame");
+            
+            if (_game.CheckGameEnd() && _game.HasWon())
+                return RedirectToPage("/Game/WinGame");
+            
+            return Page();
         }
     }
 }
