@@ -1,1 +1,7 @@
 ﻿/.idea/
+/HangmanWeb/bin/
+/HangmanWeb/obj/
+/Hangman.UnitTest/bin/
+/Hangman.UnitTest/obj/
+/Hangman/bin/
+/Hangman/obj/

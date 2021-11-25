@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Xunit;
 using Hangman;
 using Xunit.Abstractions;
@@ -15,148 +16,214 @@ namespace HangmanTests
             _testOutputHelper = testOutputHelper;
         }
 
+        private Game CreateTestGame(string word)
+        {
+            Game hmgmode = new Game();
+            hmgmode.SetWord(word);
+
+            StringBuilder newGuessedWord = new StringBuilder("");
+            for (int i = 0; i < word.Length; i++)
+                newGuessedWord.Append('_');
+            hmgmode.SetGuessedWord(newGuessedWord);
+
+            return hmgmode;
+        }
+
+        [Fact]
+        public void InitializeEmptyGameCorrectlyTest()
+        {
+            Game hmgmode = new Game();
+            Assert.Empty(hmgmode.GetGuesses());
+            Assert.True(hmgmode.GetTurn() == 0);
+            Assert.True(hmgmode.GetLives() == 8);
+            Assert.Null(hmgmode.GetWord());
+            Assert.True(hmgmode.GetGuessedWord().ToString().Equals(""));
+        }
+
+        [Fact]
+        public void AbleToIncrementTurn()
+        {
+            Game hmgmode = new Game();
+            Assert.True(hmgmode.GetTurn() == 0);
+
+            hmgmode.NextTurn();
+            Assert.True(hmgmode.GetTurn() == 1);
+        }
+
+        [Fact]
+        public void CheckEndWithoutEndingGame()
+        {
+            Game hmgmode = CreateTestGame("abc");
+            Assert.False(hmgmode.CheckGameEnd());
+        }
+
+        [Fact]
+        public void CheckGameCanWin()
+        {
+            Game hmgmode = CreateTestGame("abc");
+            Assert.False(hmgmode.CheckGameEnd());
+            Assert.False(hmgmode.HasWon());
+            hmgmode.SetGuessedWord(new StringBuilder(hmgmode.GetWord()));
+            Assert.True(hmgmode.CheckGameEnd());
+            Assert.True(hmgmode.HasWon());
+        }
+
         [Fact]
         public void WordGeneratedTest()
         {
-            HangmanGamemode hmgmode = new HangmanGamemode("Word Generated correctly test");
+            Game hmgmode = new Game();
             Assert.Null(hmgmode.GetWord());
             Assert.Equal("", hmgmode.GetGuessedWord().ToString());
 
-            hmgmode.GenerateWord();
+            hmgmode.GenerateWord("../../.././data/words.txt");
             Assert.NotNull(hmgmode.GetWord());
             Assert.True(hmgmode.GetWord().Length > 0);
-        } 
-        
-        [Fact]
-        public void GuessAddedCorrectlyTest()
-        {
-            HangmanGamemode hmgmode = new HangmanGamemode("Guess added correctly test");
-            hmgmode.Word = "abc";
-            for(int i=0; i<hmgmode.Word.Length; i++)
-                hmgmode.guessedWord.Append('_');
-            
-            Assert.Empty(hmgmode.GetGuesses());
-            new Guess("a", hmgmode);
-            Assert.NotEmpty(hmgmode.GetGuesses());
         }
-        
+
+        [Fact]
+        public void ValidGuessInWord()
+        {
+            Game hmgmode = CreateTestGame("abc");
+
+            Assert.Empty(hmgmode.GetGuesses());
+            Assert.Equal("___", hmgmode.GetGuessedWord().ToString());
+            
+            hmgmode.MakeGuess("a");
+            Assert.NotEmpty(hmgmode.GetGuesses());
+            Assert.Equal("a__", hmgmode.GetGuessedWord().ToString());
+        }
+
+        [Fact]
+        public void ValidGuessNotInWord()
+        {
+            Game hmgmode = CreateTestGame("abc");
+
+            Assert.Empty(hmgmode.GetGuesses());
+            Assert.Equal("___", hmgmode.GetGuessedWord().ToString());
+
+            hmgmode.MakeGuess("d");
+            Assert.NotEmpty(hmgmode.GetGuesses());
+            Assert.Equal("___", hmgmode.GetGuessedWord().ToString());
+        }
+
         [Fact]
         public void DuplicateGuessTest()
         {
-            HangmanGamemode hmgmode = new HangmanGamemode("Guess added correctly test");
-            hmgmode.Word = "hello";
+            Game hmgmode = new Game();
+            hmgmode.SetWord("hello");
             Assert.Empty(hmgmode.GetGuesses());
-            
-            Guess guess = new Guess("a", hmgmode);
+
+            hmgmode.MakeGuess("a");
             Assert.True(1 == hmgmode.GetGuesses().Count);
-            
-            Guess guess2 = new Guess("a", hmgmode);
+
+            hmgmode.MakeGuess("a");
             Assert.True(1 == hmgmode.GetGuesses().Count);
         }
-        
+
         [Fact]
-        public void AbleToWinTest()
+        public void UserCanWinTest()
         {
-            HangmanGamemode hmgmode = new HangmanGamemode("Able to Win test");
-            hmgmode.Word = "hello";
-            for(int i=0; i<hmgmode.Word.Length; i++)
-                hmgmode.guessedWord.Append('_');
-            Assert.False(hmgmode.gameEnded);
-            
-            new Guess("h", hmgmode);
-            hmgmode.CheckWinLoss();
-            Assert.False(hmgmode.gameEnded);
-            
-            new Guess("e", hmgmode);
-            hmgmode.CheckWinLoss();
-            Assert.False(hmgmode.gameEnded);
-            
-            new Guess("l", hmgmode);
-            hmgmode.CheckWinLoss();
-            Assert.False(hmgmode.gameEnded);
-            
-            new Guess("o", hmgmode);
-            hmgmode.CheckWinLoss();
-            Assert.True(hmgmode.gameEnded);
+            Game hmgmode = CreateTestGame("hello");
+            Assert.False(hmgmode.CheckGameEnd());
+
+            hmgmode.MakeGuess("h");
+            Assert.False(hmgmode.CheckGameEnd());
+
+            hmgmode.MakeGuess("e");
+            Assert.False(hmgmode.CheckGameEnd());
+
+            hmgmode.MakeGuess("l");
+            Assert.False(hmgmode.CheckGameEnd());
+
+            hmgmode.MakeGuess("o");
+            Assert.True(hmgmode.CheckGameEnd());
+        }
+
+        [Fact]
+        public void CheckGameCanLose()
+        {
+            Game hmgmode = CreateTestGame("l");
+            Assert.False(hmgmode.CheckGameEnd());
+
+            hmgmode.SetLives(0);
+            Assert.True(hmgmode.CheckGameEnd());
+            Assert.False(hmgmode.HasWon());
         }
 
         [Fact]
         public void DoubleUpLetterTest()
         {
-            HangmanGamemode hmgmode = new HangmanGamemode("Able to add double letters test");
-            hmgmode.Word = "abcabcab";
-            for(int i=0; i<hmgmode.Word.Length; i++)
-                hmgmode.guessedWord.Append('_');
-            
-            new Guess("c", hmgmode);
+            Game hmgmode = CreateTestGame("abcabcab");
+
+            hmgmode.MakeGuess("c");
             Assert.Equal("__c__c__", hmgmode.GetGuessedWord().ToString());
-            
-            new Guess("a", hmgmode);
+
+            hmgmode.MakeGuess("a");
             Assert.Equal("a_ca_ca_", hmgmode.GetGuessedWord().ToString());
         }
 
         [Fact]
         public void DecreasesLivesTest()
         {
-            HangmanGamemode hmgmode = new HangmanGamemode("Able to decrease lives test");
-            hmgmode.Word = "a";
-            
-            Assert.Equal(8, hmgmode.lives);
-            
+            Game hmgmode = CreateTestGame("a");
+
+            Assert.Equal(8, hmgmode.GetLives());
+
             hmgmode.DecreaseLives();
-            Assert.Equal(7, hmgmode.lives);
-            
-            new Guess("b", hmgmode);
-            Assert.Equal(6, hmgmode.lives);
+            Assert.Equal(7, hmgmode.GetLives());
+
+            hmgmode.MakeGuess("b");
+            Assert.Equal(6, hmgmode.GetLives());
         }
 
         [Fact]
-        public void AbleToLoseTest()
+        public void UserCanLoseTest()
         {
-            HangmanGamemode hmgmode = new HangmanGamemode("Able to lose test");
-            hmgmode.Word = "a";
+            Game hmgmode = CreateTestGame("a");
             string makeGuesses = "bcdefghijk";
             for (int i = 0; i < 8; i++)
-            {
-                new Guess(makeGuesses[i].ToString(), hmgmode);
-                hmgmode.CheckWinLoss();
-            }
-            Assert.True(hmgmode.gameEnded);
+                hmgmode.MakeGuess(makeGuesses[i].ToString());
+
+            Assert.True(hmgmode.CheckGameEnd());
         }
-        
+
         [Fact]
-        public void CasingTest()
+        public void UserCanGuessDifferentCasings()
         {
-            HangmanGamemode hmgmode = new HangmanGamemode("Able to change letter casing test");
-            hmgmode.Word = "a";
-            
-            new Guess("b", hmgmode);
+            Game hmgmode = CreateTestGame("a");
+
+            hmgmode.MakeGuess("b");
             Assert.True(hmgmode.GetGuesses().Contains('b'));
-            
-            new Guess("C", hmgmode);
+
+            hmgmode.MakeGuess("C");
             Assert.True(hmgmode.GetGuesses().Contains('c'));
 
-            int currLives = hmgmode.lives;
-            
-            new Guess("c", hmgmode);
-            Assert.True(hmgmode.GetGuesses().Contains('c'));
-            Assert.True(hmgmode.lives == currLives);
+            int currLives = hmgmode.GetLives();
 
+            hmgmode.MakeGuess("c");
+            Assert.True(hmgmode.GetGuesses().Contains('c'));
+            Assert.True(hmgmode.GetLives() == currLives);
         }
-        
-        [Fact]
-        public void InvalidGuessTest()
-        {
-            HangmanGamemode hmgmode = new HangmanGamemode("Able to change letter casing test");
-            hmgmode.Word = "a";
 
-            new Guess("multiple chars", hmgmode);
+
+        [Fact]
+        public void UserCannotGuessANonAlphabetChar()
+        {
+            Game hmgmode = CreateTestGame("a");
             Assert.Empty(hmgmode.GetGuesses());
 
-            new Guess("%", hmgmode);
+            hmgmode.MakeGuess("%");
+            Assert.Empty(hmgmode.GetGuesses());
+        }
+
+        [Fact]
+        public void UserCannotGuessMultipleChars()
+        {
+            Game hmgmode = CreateTestGame("a");
+            Assert.Empty(hmgmode.GetGuesses());
+
+            hmgmode.MakeGuess("multiple chars");
             Assert.Empty(hmgmode.GetGuesses());
         }
     }
-    
-    
 }

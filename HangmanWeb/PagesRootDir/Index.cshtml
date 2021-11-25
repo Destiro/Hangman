@@ -1,0 +1,33 @@
+﻿@page
+@model HangmanWeb.PagesRootDir.Index
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html style="
+background: url('https://th.bing.com/th/id/R.64dc953b1f57115ab131e40437811ff0?rik=fix7YRrMfMPGug&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f03%2fPikachu-wallpaper-HD-dowload.jpg&ehk=O%2fL9lKPSbzClJQdssk80BPnJegpti4vH04WoFm5OD5I%3d&risl=&pid=ImgRaw&r=0');
+background-size: 100% 100%;
+">
+<head>
+    <title>Hangman Intro</title>
+</head>
+<body style="align-items: center; justify-content: center">
+<div style="
+    background-color: rgba(0,0,0,0.5); 
+    width: 30%; text-align: center; 
+    text-justify: auto; min-height: 20%; transform: translate(50%, 50%);
+    padding: 50px 100px;
+">
+    <h2 style="color: white;"> Introduction </h2>
+    <p style="color: white; line-height: 30px">
+        Hello! Welcome to le hangman game.<br>
+        To play you need to find the hidden word, Take a turn by guessing a letter and once<br>
+        the word is found, you win the game. But if you run out of lives, you lose the game.<br>
+        <a href="/Game/TakeTurn" style="color: red;">Click Here to continue.</a>
+    </p>
+</div>
+</body>
+</html>

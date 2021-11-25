@@ -6,43 +6,21 @@ namespace Hangman
 {
     public class Guess
     {
-        public Guess(string guess, HangmanGamemode hangmanGamemode)
+        private static string _guess;
+        public Guess(string guess)
         {
-            guess = guess?.ToLower();
-            if (guess != null && guess.Length == 1)
-                CheckGuess(char.Parse(guess), hangmanGamemode);
+            _guess = guess;
         }
 
-        private void CheckGuess(char guess, HangmanGamemode hangmanGamemode)
+        public bool ValidLength()
         {
-            ArrayList guesses = hangmanGamemode.GetGuesses();
-            string word = hangmanGamemode.GetWord();
-            Boolean addedLetter = false;
-            StringBuilder guessedWord = hangmanGamemode.GetGuessedWord();
+            return _guess != null && _guess.Length == 1;
+        }
 
-            if (hangmanGamemode.GetGuesses().Contains(guess) || !Char.IsLetter(guess))
-                return;
-
-            guesses.Add(guess);
-            hangmanGamemode.SetGuesses(guesses);
-
-            for (var i = 0; i < word.Length; i++)
-            {
-                if (word[i].Equals(guess))
-                {
-                    guessedWord[i] = guess;
-                    addedLetter = true;
-                }
-            }
-
-            if (addedLetter)
-            {
-                hangmanGamemode.SetGuessedWord(guessedWord);
-            }
-            else
-            {
-                hangmanGamemode.DecreaseLives();
-            }
+        public bool ValidGuess(ArrayList guesses)
+        {
+            var guessChar = char.Parse(_guess.ToLower());
+            return !guesses.Contains(guessChar) && char.IsLetter(guessChar);
         }
     }
 }

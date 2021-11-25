@@ -1,0 +1,25 @@
+﻿@page
+@model HangmanWeb.PagesRootDir.Game.LoseGame
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html style="align-items: center; justify-content: center">
+<body>
+
+<div style="text-align: center; align-items: center; justify-content: center">
+    <div style="
+         background: url('https://raw.githubusercontent.com/Destiro/Hangman/add-to-web/HangmanWeb/data/drawings/lose_screen.png');
+         background-size: 1920px 980px; min-height: 1920px; min-width: 980px; padding-top: 150px; padding-left: 1100px;" />
+    <h3>The Answer was: @Model.GetAnswer()</h3>
+    <h3>Would you like to play again? </h3>
+    <form method="post">
+        <input type="submit" name="submit" value="Play Again"/>
+    </form>
+</div>
+</body>
+</html>
+
