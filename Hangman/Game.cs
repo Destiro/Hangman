@@ -11,6 +11,14 @@ namespace Hangman
         public int Lives { get; set; } = 8;
         public ArrayList Guesses = new ArrayList();
         public int Turn;
+
+        public void RestartGame()
+        {
+            GenerateWord();
+            Guesses.Clear();
+            Turn = 0;
+            Lives = 8;
+        }
         public void GenerateWord()
         {
             string[] lines = System.IO.File.ReadAllLines("./data/words.txt");
