@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -9,7 +10,7 @@ namespace Hangman
     {
         private Word _word = new Word("");
         private int _lives = 8;
-        private readonly ArrayList _guesses = new ArrayList(); // todo make generic list
+        private readonly List<char> _guesses = new List<char>();
         private int _turn;
 
         public void RestartGame(string path)
@@ -57,7 +58,7 @@ namespace Hangman
             _word = new Word(newWord);
         }
 
-        public ArrayList GetGuesses()
+        public List<char> GetGuesses()
         {
             return _guesses;
         }

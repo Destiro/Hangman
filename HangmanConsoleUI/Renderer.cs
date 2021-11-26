@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace HangmanConsoleUI
@@ -23,7 +24,7 @@ namespace HangmanConsoleUI
             Console.WriteLine("Press Enter to continue.");
         }
 
-        public static void PrintHeader(int turn, int lives, string word, ArrayList guesses)
+        public static void PrintHeader(int turn, int lives, string word, List<char> guesses)
         {
             Console.WriteLine("----------------------------------");
             Console.WriteLine($"Turn: {turn} || Lives: {lives} || Current word : {CreateGuessedWord(word, guesses)}");
@@ -35,7 +36,7 @@ namespace HangmanConsoleUI
             }
         }
 
-        public static void PrintWinLoss(bool hasWon, string word, ArrayList guesses)
+        public static void PrintWinLoss(bool hasWon, string word, List<char> guesses)
         {
             Console.WriteLine("----------------------------------");
             if (!hasWon)
@@ -49,7 +50,7 @@ namespace HangmanConsoleUI
             }
         }
 
-        private static string CreateGuessedWord(string word, ArrayList guesses)
+        private static string CreateGuessedWord(string word, List<char> guesses)
         {
             return word.Aggregate("", (current, letter) => current + (guesses.Contains(letter) ? $"{letter}" : "_"));
         }

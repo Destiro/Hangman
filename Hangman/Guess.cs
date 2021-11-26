@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Hangman
@@ -17,7 +18,7 @@ namespace Hangman
             return _guess != null && _guess.Length == 1;
         }
 
-        public bool ValidGuess(ArrayList guesses)
+        public bool ValidGuess(List<char> guesses)
         {
             var guessChar = char.Parse(_guess.ToLower());
             return !guesses.Contains(guessChar) && char.IsLetter(guessChar);
