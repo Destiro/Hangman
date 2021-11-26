@@ -28,9 +28,8 @@ namespace Hangman
         
         public void MakeGuess(string guess)
         {
-            var makeGuess = new Guess(guess); //todo list of chars
-
-            if (!makeGuess.ValidLength() || !makeGuess.ValidGuess(_guesses)) return;
+            if (!Guess.ValidLength(guess) || !Guess.ValidGuess(guess, _guesses)) return;
+            
             var guessChar = char.Parse(guess.ToLower());
             _guesses.Add(guessChar);
 
