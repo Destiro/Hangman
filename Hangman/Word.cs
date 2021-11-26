@@ -13,11 +13,7 @@ namespace Hangman
 
         public bool CheckInWord(char guess)
         {
-            for (var i = 0; i < _word.Length; i++)
-                if (_word[i].Equals(guess))
-                    return true;
-            
-            return false;
+            return _word.Contains(guess);
         }
 
         public StringBuilder AddGuesses(StringBuilder currGuesses, char guess)

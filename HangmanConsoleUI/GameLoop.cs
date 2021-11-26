@@ -20,11 +20,11 @@ namespace Hangman
             while (!_game.CheckGameEnd())
             {
                 Renderer.DrawHangman(_game.GetLives());
-                Renderer.PrintHeader(_game.GetTurn(), _game.GetLives(), _game.GetGuessedWord(), _game.GetGuesses());
+                Renderer.PrintHeader(_game.GetTurn(), _game.GetLives(), _game.GetWord(), _game.GetGuesses());
                 TakeTurn();
             }
 
-            Renderer.PrintWinLoss(_game.HasWon(), _game.GetWord(), _game.GetGuessedWord());
+            Renderer.PrintWinLoss(_game.HasWon(), _game.GetWord(), _game.GetGuesses());
         }
 
         private void Startup()

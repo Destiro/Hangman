@@ -32,6 +32,7 @@ C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1
 C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.RazorTargetAssemblyInfo.cs
 C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\HangmanWeb.Views.pdb
 C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\PagesRootDir\Index.cshtml.g.cs
-C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\PagesRootDir\Game\TakeTurn.cshtml.g.cs
 C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\PagesRootDir\Game\LoseGame.cshtml.g.cs
 C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\PagesRootDir\Game\WinGame.cshtml.g.cs
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\PagesRootDir\Game\New.cshtml.g.cs
+C:\Users\connor.debruyn\RiderProjects\Hangman\HangmanWeb\obj\Debug\netcoreapp3.1\Razor\PagesRootDir\Game\Play.cshtml.g.cs

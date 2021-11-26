@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections;
-using System.Text;
-using Hangman;
+using System.Linq;
 
 namespace HangmanConsoleUI
 {
     public class Renderer
     {
-        public static void DrawHangman(int Lives)
+        public static void DrawHangman(int lives)
         {
             Console.Clear();
-            string[] lines = System.IO.File.ReadAllLines($"../../.././data/hangman_{Lives}.txt");
+            string[] lines = System.IO.File.ReadAllLines($"../../.././data/hangman_{lives}.txt");
             foreach (var line in lines)
                 Console.WriteLine(line);
         }
@@ -24,30 +23,35 @@ namespace HangmanConsoleUI
             Console.WriteLine("Press Enter to continue.");
         }
 
-        public static void PrintHeader(int Turn, int Lives, StringBuilder GuessedWord, ArrayList Guesses)
+        public static void PrintHeader(int turn, int lives, string word, ArrayList guesses)
         {
             Console.WriteLine("----------------------------------");
-            Console.WriteLine($"Turn: {Turn} || Lives: {Lives} || Current word : {GuessedWord}");
+            Console.WriteLine($"Turn: {turn} || Lives: {lives} || Current word : {CreateGuessedWord(word, guesses)}");
             Console.Write("Current Guesses: ");
 
-            foreach (char letter in Guesses)
+            foreach (char letter in guesses)
             {
                 Console.Write("{0} ", letter);
             }
         }
 
-        public static void PrintWinLoss(bool HasWon, string Word, StringBuilder GuessedWord)
+        public static void PrintWinLoss(bool hasWon, string word, ArrayList guesses)
         {
             Console.WriteLine("----------------------------------");
-            if (!HasWon)
+            if (!hasWon)
             {
                 Console.WriteLine("You have lost the Game!");
-                Console.WriteLine($"Word = {Word}, Current word = {GuessedWord}");
+                Console.WriteLine($"Word = {word}, Current word = {CreateGuessedWord(word, guesses)}");
             }
             else
             {
                 Console.WriteLine("You have won the game!");
             }
+        }
+
+        private static string CreateGuessedWord(string word, ArrayList guesses)
+        {
+            return word.Aggregate("", (current, letter) => current + (guesses.Contains(letter) ? $"{letter}" : "_"));
         }
     }
 }

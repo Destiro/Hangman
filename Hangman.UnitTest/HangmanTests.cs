@@ -20,12 +20,6 @@ namespace HangmanTests
         {
             Game hmgmode = new Game();
             hmgmode.SetWord(word);
-
-            StringBuilder newGuessedWord = new StringBuilder("");
-            for (int i = 0; i < word.Length; i++)
-                newGuessedWord.Append('_');
-            hmgmode.SetGuessedWord(newGuessedWord);
-
             return hmgmode;
         }
 
@@ -37,7 +31,6 @@ namespace HangmanTests
             Assert.True(hmgmode.GetTurn() == 0);
             Assert.True(hmgmode.GetLives() == 8);
             Assert.Equal("", hmgmode.GetWord());
-            Assert.True(hmgmode.GetGuessedWord().ToString().Equals(""));
         }
 
         [Fact]
@@ -63,7 +56,11 @@ namespace HangmanTests
             Game hmgmode = CreateTestGame("abc");
             Assert.False(hmgmode.CheckGameEnd());
             Assert.False(hmgmode.HasWon());
-            hmgmode.SetGuessedWord(new StringBuilder(hmgmode.GetWord()));
+            
+            hmgmode.MakeGuess("a");
+            hmgmode.MakeGuess("b");
+            hmgmode.MakeGuess("c");
+            
             Assert.True(hmgmode.CheckGameEnd());
             Assert.True(hmgmode.HasWon());
         }
@@ -73,7 +70,6 @@ namespace HangmanTests
         {
             Game hmgmode = new Game();
             Assert.Equal("",hmgmode.GetWord());
-            Assert.Equal("", hmgmode.GetGuessedWord().ToString());
 
             hmgmode.GenerateWord("../../.././data/words.txt");
             Assert.NotNull(hmgmode.GetWord());
@@ -81,29 +77,14 @@ namespace HangmanTests
         }
 
         [Fact]
-        public void ValidGuessInWord()
-        {
-            Game hmgmode = CreateTestGame("abc");
-
-            Assert.Empty(hmgmode.GetGuesses());
-            Assert.Equal("___", hmgmode.GetGuessedWord().ToString());
-            
-            hmgmode.MakeGuess("a");
-            Assert.NotEmpty(hmgmode.GetGuesses());
-            Assert.Equal("a__", hmgmode.GetGuessedWord().ToString());
-        }
-
-        [Fact]
         public void ValidGuessNotInWord()
         {
-            Game hmgmode = CreateTestGame("abc");
+            Game hmgmode = CreateTestGame("a");
 
             Assert.Empty(hmgmode.GetGuesses());
-            Assert.Equal("___", hmgmode.GetGuessedWord().ToString());
 
             hmgmode.MakeGuess("d");
-            Assert.NotEmpty(hmgmode.GetGuesses());
-            Assert.Equal("___", hmgmode.GetGuessedWord().ToString());
+            Assert.False(hmgmode.CheckGameEnd());
         }
 
         [Fact]
@@ -153,13 +134,10 @@ namespace HangmanTests
         [Fact]
         public void DoubleUpLetterTest()
         {
-            Game hmgmode = CreateTestGame("abcabcab");
+            Game hmgmode = CreateTestGame("cc");
 
             hmgmode.MakeGuess("c");
-            Assert.Equal("__c__c__", hmgmode.GetGuessedWord().ToString());
-
-            hmgmode.MakeGuess("a");
-            Assert.Equal("a_ca_ca_", hmgmode.GetGuessedWord().ToString());
+            Assert.True(hmgmode.HasWon());
         }
 
         [Fact]
