@@ -19,8 +19,7 @@ namespace HangmanWeb.PagesRootDir.Game
 
         public IActionResult OnPost()
         {
-            _game.RestartGame("./data/words.txt");
-            return RedirectToPage("/Game/TakeTurn");
+            return RedirectToPage("/Game/New");
         }
     }
 }

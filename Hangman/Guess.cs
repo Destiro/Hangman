@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Hangman
 {
     public class Guess
     {
-        private static string _guess;
-        public Guess(string guess)
+        public static bool ValidLength(string guess)
         {
-            _guess = guess;
+            return guess != null && guess.Length == 1;
         }
 
-        public bool ValidLength()
+        public static bool ValidGuess(string guess, List<char> guesses)
         {
-            return _guess != null && _guess.Length == 1;
-        }
-
-        public bool ValidGuess(ArrayList guesses)
-        {
-            var guessChar = char.Parse(_guess.ToLower());
+            var guessChar = char.Parse(guess.ToLower());
             return !guesses.Contains(guessChar) && char.IsLetter(guessChar);
         }
     }

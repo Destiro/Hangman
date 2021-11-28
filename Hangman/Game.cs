@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Hangman
 {
     public class Game
     {
-        private string _word;
-        private StringBuilder _guessedWord = new StringBuilder("");
+        private Word _word = new Word("");
         private int _lives = 8;
-        private readonly ArrayList _guesses = new ArrayList();
+        private readonly List<char> _guesses = new List<char>();
         private int _turn;
 
         public void RestartGame(string path)
@@ -21,46 +22,29 @@ namespace Hangman
         }
         public void GenerateWord(string path)
         {
-            string[] lines = System.IO.File.ReadAllLines(path);
-            _word = lines[new Random().Next(lines.Length)];
-            _guessedWord = new StringBuilder();
-
-            for(int i=0; i<_word.Length; i++)
-                _guessedWord.Append('_');
+            var lines = System.IO.File.ReadAllLines(path);
+            _word = new Word(lines[new Random().Next(lines.Length)]);
         }
         
         public void MakeGuess(string guess)
         {
-            var makeGuess = new Guess(guess);
-            var currentWord = new Word(_word);//todo set when generated
+            if (!Guess.ValidLength(guess) || !Guess.ValidGuess(guess, _guesses)) return;
             
-            if (!makeGuess.ValidLength() || !makeGuess.ValidGuess(_guesses)) return;
             var guessChar = char.Parse(guess.ToLower());
             _guesses.Add(guessChar);
 
-            if (currentWord.CheckInWord(guessChar))
-            {
-                _guessedWord = currentWord.AddGuesses(_guessedWord, guessChar);
-            }
-            else
-            {
+            if (!_word.CheckInWord(guessChar))
                 DecreaseLives();
-            }
         }
 
         public bool CheckGameEnd()
         {
-            return _lives == 0 || _guessedWord.Equals(_word);
+            return _lives == 0 || HasWon();
         }
 
         public bool HasWon()
         {
-            return _guessedWord.ToString().Equals(_word);
-        }
-        
-        public void SetGuessedWord(StringBuilder newGuessedWord)
-        {
-            _guessedWord = newGuessedWord;
+            return _word.GetWord().All(letter => _guesses.Contains(letter));
         }
 
         public void SetLives(int newLives)
@@ -70,27 +54,22 @@ namespace Hangman
 
         public void SetWord(string newWord)
         {
-            _word = newWord;
+            _word = new Word(newWord);
         }
 
-        public ArrayList GetGuesses()
+        public List<char> GetGuesses()
         {
             return _guesses;
         }
 
         public string GetWord()
         {
-            return _word;
+            return _word.GetWord();
         }
 
         public int GetTurn()
         {
             return _turn;
-        }
-
-        public StringBuilder GetGuessedWord()
-        {
-            return _guessedWord;
         }
 
         public void DecreaseLives()

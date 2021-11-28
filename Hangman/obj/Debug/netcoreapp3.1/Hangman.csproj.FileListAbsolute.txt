@@ -1,7 +1,4 @@
-C:\Users\connor.debruyn\RiderProjects\Hangman\Hangman\bin\Debug\netcoreapp3.1\Hangman.exe
 C:\Users\connor.debruyn\RiderProjects\Hangman\Hangman\bin\Debug\netcoreapp3.1\Hangman.deps.json
-C:\Users\connor.debruyn\RiderProjects\Hangman\Hangman\bin\Debug\netcoreapp3.1\Hangman.runtimeconfig.json
-C:\Users\connor.debruyn\RiderProjects\Hangman\Hangman\bin\Debug\netcoreapp3.1\Hangman.runtimeconfig.dev.json
 C:\Users\connor.debruyn\RiderProjects\Hangman\Hangman\bin\Debug\netcoreapp3.1\Hangman.dll
 C:\Users\connor.debruyn\RiderProjects\Hangman\Hangman\bin\Debug\netcoreapp3.1\Hangman.pdb
 C:\Users\connor.debruyn\RiderProjects\Hangman\Hangman\obj\Debug\netcoreapp3.1\Hangman.csprojAssemblyReference.cache
@@ -10,4 +7,3 @@ C:\Users\connor.debruyn\RiderProjects\Hangman\Hangman\obj\Debug\netcoreapp3.1\Ha
 C:\Users\connor.debruyn\RiderProjects\Hangman\Hangman\obj\Debug\netcoreapp3.1\Hangman.csproj.CoreCompileInputs.cache
 C:\Users\connor.debruyn\RiderProjects\Hangman\Hangman\obj\Debug\netcoreapp3.1\Hangman.dll
 C:\Users\connor.debruyn\RiderProjects\Hangman\Hangman\obj\Debug\netcoreapp3.1\Hangman.pdb
-C:\Users\connor.debruyn\RiderProjects\Hangman\Hangman\obj\Debug\netcoreapp3.1\Hangman.genruntimeconfig.cache

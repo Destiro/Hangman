@@ -1,0 +1,32 @@
+﻿@page
+@model HangmanWeb.PagesRootDir.Game.TakeTurn
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html style="text-align: center; justify-content: center; align-items: center;
+   background: url('https://th.bing.com/th/id/R.89014aa28bdb750a86a3128f2e19f7db?rik=vqTCRuKyOXeF%2bg&riu=http%3a%2f%2fwww.hdwallpaperspulse.com%2fwp-content%2fuploads%2f2017%2f01%2f26%2fawesome-view-natural-image.jpg&ehk=xtfFYTFf8%2f1DQzBvg%2fB%2fCt7xNSuSrqNTdvmqECx%2bIXw%3d&risl=&pid=ImgRaw&r=0');
+min-width: 100%; min-height: 100%;">
+<head>
+    <title>Hangman Game</title>
+</head>
+<body>
+<div>
+    <div>
+        <img src=@Model.GetDrawingUrl() style="width:800px; height: 500px;">
+    </div>
+    <div style="background: rgba(0,0,0,0.5); padding: 50px; width: 38%; transform: translate(65%, 50%); margin-top: -5%;">
+        <h3 style="color: white;"> Turn: @Model.GetTurn(), Lives: @Model.GetLives(), Guessed Word: @Model.GetGuessedWord()</h3>
+        <h3 style="color: white;"> Current Guesses: @Model.GetGuesses()</h3>
+        <form method = "post">
+            <h3 style="color: white;"> Take A Guess (1 char):</h3> 
+            <input type = "text" name = "takeGuess" autocomplete="off" autofocus />
+            <input type = "submit" name = "submit" value = "Submit" />
+        </form>
+    </div>
+</div>
+</body>
+</html>
